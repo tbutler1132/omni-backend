@@ -16,3 +16,13 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getPost = async (req, res) => {
+    const { id } = req.params
+    const post = await client.fetch(`*[_type == 'post' && _id == "${id}"]`)
+    try {
+        return res.status(200).json(post)
+    } catch (error) {
+        return res.status(500).json('Error')
+    }
+}
+
